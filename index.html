@@ -7,421 +7,306 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: #f5f5f0;
-      min-height: 100vh;
-    }
-
-    /* ── Stripe bar ── */
-    .stripe-bar {
-      height: 12px;
-      background: repeating-linear-gradient(
-        90deg,
-        #B22234 0px, #B22234 40px,
-        #fff    40px, #fff    56px
-      );
-    }
-
-    /* ── Header ── */
-    header {
-      background: #002868;
-      color: white;
-      text-align: center;
-      padding: 3rem 1.5rem 2.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Stars pattern */
-    header::before {
-      content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';
-      position: absolute;
-      top: 10px;
-      left: 0; right: 0;
-      text-align: center;
-      font-size: 0.75rem;
-      letter-spacing: 0.8em;
-      color: rgba(255,255,255,0.18);
-      pointer-events: none;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-    header::after {
-      content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';
-      position: absolute;
-      bottom: 10px;
-      left: 0; right: 0;
-      text-align: center;
-      font-size: 0.75rem;
-      letter-spacing: 0.8em;
-      color: rgba(255,255,255,0.18);
-      pointer-events: none;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-
+    body { font-family: 'Nunito', sans-serif; background: #f5f5f0; min-height: 100vh; }
+    .stripe-bar { height: 12px; background: repeating-linear-gradient(90deg, #B22234 0px, #B22234 40px, #fff 40px, #fff 56px); }
+    header { background: #002868; color: white; text-align: center; padding: 3rem 1.5rem 2.5rem; position: relative; overflow: hidden; }
+    header::before { content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★'; position: absolute; top: 10px; left: 0; right: 0; text-align: center; font-size: 0.75rem; letter-spacing: 0.8em; color: rgba(255,255,255,0.18); pointer-events: none; white-space: nowrap; overflow: hidden; }
+    header::after { content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★'; position: absolute; bottom: 10px; left: 0; right: 0; text-align: center; font-size: 0.75rem; letter-spacing: 0.8em; color: rgba(255,255,255,0.18); pointer-events: none; white-space: nowrap; overflow: hidden; }
     .header-eagle { font-size: 4rem; margin-bottom: 0.5rem; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3)); }
+    header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 7vw, 4.5rem); letter-spacing: 0.06em; line-height: 1; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+    .header-rule { width: 80px; height: 3px; background: #B22234; margin: 0.8rem auto; border-radius: 2px; }
+    header p { font-size: 1rem; color: rgba(255,255,255,0.8); font-weight: 600; letter-spacing: 0.04em; }
+    .header-bottom-stripe { height: 8px; background: #B22234; }
+    main { max-width: 1020px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
 
-    header h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 7vw, 4.5rem);
-      letter-spacing: 0.06em;
-      line-height: 1;
-      color: #fff;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
-    }
+    .game-section { margin-bottom: 3.5rem; }
+    .game-section-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; }
+    .game-section-header-label { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.08em; color: #002868; white-space: nowrap; }
+    .game-section-header::after { content: ''; flex: 1; height: 2px; background: #ddd; }
 
-    .header-rule {
-      width: 80px;
-      height: 3px;
-      background: #B22234;
-      margin: 0.8rem auto;
-      border-radius: 2px;
-    }
+    .game-layout { display: grid; grid-template-columns: 270px 1fr; gap: 1.25rem; align-items: start; }
+    @media (max-width: 700px) { .game-layout { grid-template-columns: 1fr; } }
 
-    header p {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.8);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
+    .card { background: white; border-radius: 4px; text-decoration: none; color: inherit; box-shadow: 0 2px 16px rgba(0,0,0,0.09); border-top: 6px solid var(--accent, #002868); transition: all 0.2s ease; display: flex; flex-direction: column; overflow: hidden; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.13); }
+    .card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+    .card-icon { font-size: 2.2rem; }
+    .card-tag { display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent, #002868); background: var(--accent-bg, #eef2ff); padding: 0.2rem 0.65rem; border-radius: 2px; width: fit-content; }
+    .card h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 0.04em; color: #111; line-height: 1.2; }
+    .card p { font-size: 0.85rem; color: #555; line-height: 1.6; flex: 1; }
+    .card-footer { background: var(--accent, #002868); color: white; padding: 0.65rem 1.5rem; font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 0.1em; display: flex; align-items: center; justify-content: space-between; }
+    .card-footer span { opacity: 0.8; font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 700; }
 
-    /* ── Red stripe under header ── */
-    .header-bottom-stripe {
-      height: 8px;
-      background: #B22234;
-    }
+    .study-panel { background: white; border-radius: 4px; box-shadow: 0 2px 16px rgba(0,0,0,0.09); overflow: hidden; }
+    .study-panel-tabs { display: flex; border-bottom: 2px solid #f0f0f0; }
+    .study-tab { flex: 1; padding: 0.7rem 1rem; font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 0.08em; color: #999; background: #fafafa; border: none; cursor: pointer; transition: all 0.15s; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+    .study-tab.active { color: var(--accent, #002868); background: white; border-bottom-color: var(--accent, #002868); }
+    .study-tab:hover:not(.active) { color: #555; background: #f5f5f5; }
+    .study-content { display: none; padding: 1.25rem 1.5rem; }
+    .study-content.active { display: block; }
 
-    /* ── Main ── */
-    main {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 4rem;
-    }
-
-    .section-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.15em;
-      color: #002868;
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 2px;
-      background: #ddd;
-    }
-
-    /* ── Game Cards ── */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .card {
-      background: white;
-      border-radius: 4px;
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.09);
-      border-top: 6px solid var(--accent, #002868);
-      transition: all 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.14);
-    }
-
-    .card-body { padding: 1.75rem; flex: 1; display: flex; flex-direction: column; gap: 0.6rem; }
-    .card-icon { font-size: 2.4rem; }
-    .card-tag {
-      display: inline-block;
-      font-size: 0.68rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent, #002868);
-      background: var(--accent-bg, #eef2ff);
-      padding: 0.2rem 0.65rem;
-      border-radius: 2px;
-      width: fit-content;
-    }
-    .card h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      letter-spacing: 0.04em;
-      color: #111;
-      line-height: 1.2;
-    }
-    .card p {
-      font-size: 0.88rem;
-      color: #555;
-      line-height: 1.6;
-      flex: 1;
-    }
-
-    .card-footer {
-      background: var(--accent, #002868);
-      color: white;
-      padding: 0.7rem 1.75rem;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 0.1em;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .card-footer span { opacity: 0.8; font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700; }
-
-    /* ── Tips ── */
-    .tips {
-      background: white;
-      border-radius: 4px;
-      padding: 1.75rem;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.09);
-      border-left: 6px solid #B22234;
-    }
-    .tips h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.2rem;
-      letter-spacing: 0.08em;
-      color: #002868;
-      margin-bottom: 1rem;
-    }
-    .tips ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
-    .tips li {
-      font-size: 0.9rem;
-      color: #374151;
-      display: flex;
-      gap: 0.7rem;
-      align-items: flex-start;
-    }
-    .tips li span:first-child { flex-shrink: 0; margin-top: 1px; }
-
-    /* ── Resource Grid ── */
-    .resource-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2.5rem;
-    }
-    .resource-group {
-      background: white;
-      border-radius: 4px;
-      padding: 1.25rem 1.5rem;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.09);
-      border-top: 4px solid #002868;
-    }
-    .resource-group-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 0.06em;
-      color: #002868;
-      margin-bottom: 0.8rem;
-    }
-    .resource-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .resource-group li a {
-      font-size: 0.85rem;
-      color: #374151;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: color 0.15s;
-    }
+    .resource-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 1rem; }
+    .resource-group-title { font-family: 'Bebas Neue', sans-serif; font-size: 0.88rem; letter-spacing: 0.06em; color: #002868; margin-bottom: 0.5rem; padding-bottom: 0.3rem; border-bottom: 2px solid #f0f0f0; }
+    .resource-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .resource-group li a { font-size: 0.82rem; color: #374151; text-decoration: none; display: flex; align-items: flex-start; gap: 0.35rem; line-height: 1.4; transition: color 0.15s; }
     .resource-group li a:hover { color: #B22234; }
-    .resource-group li a .yt { color: #ff0000; font-size: 0.75rem; flex-shrink: 0; }
+    .resource-group li a .ico { flex-shrink: 0; margin-top: 1px; font-style: normal; color: #B22234; font-size: 0.7rem; }
 
-    /* ── Footer ── */
-    .footer-stripe {
-      height: 8px;
-      background: repeating-linear-gradient(
-        90deg,
-        #B22234 0px, #B22234 40px,
-        #fff    40px, #fff    56px
-      );
-    }
-    footer {
-      background: #002868;
-      color: rgba(255,255,255,0.6);
-      text-align: center;
-      padding: 1.2rem;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
-    }
+    .tips { background: white; border-radius: 4px; padding: 1.5rem; box-shadow: 0 2px 16px rgba(0,0,0,0.09); border-left: 6px solid #B22234; margin-top: 1rem; }
+    .tips h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.08em; color: #002868; margin-bottom: 0.8rem; }
+    .tips ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .tips li { font-size: 0.88rem; color: #374151; display: flex; gap: 0.6rem; align-items: flex-start; }
+    .tips li span:first-child { flex-shrink: 0; }
+
+    .footer-stripe { height: 8px; background: repeating-linear-gradient(90deg, #B22234 0px, #B22234 40px, #fff 40px, #fff 56px); }
+    footer { background: #002868; color: rgba(255,255,255,0.6); text-align: center; padding: 1.2rem; font-size: 0.8rem; letter-spacing: 0.05em; }
     footer strong { color: white; }
   </style>
 </head>
 <body>
 
 <div class="stripe-bar"></div>
-
 <header>
-  <div class="header-eagle">🦅</div>
+  <div class="header-eagle">&#x1F985;</div>
   <h1>Mr. Richardson's Study World</h1>
   <div class="header-rule"></div>
   <p>Choose your unit &mdash; quiz yourself, earn your rank, beat the leaderboard.</p>
 </header>
-
 <div class="header-bottom-stripe"></div>
 
 <main>
 
-  <p class="section-label">★ &nbsp;Study Games</p>
-
-  <div class="cards">
-
-    <a class="card" href="https://jakerichardson-afk.github.io/cold-war-civil-rights-game/" style="--accent:#B22234; --accent-bg:#fff0f0;">
-      <div class="card-body">
-        <div class="card-icon">🦅</div>
-        <span class="card-tag">US History</span>
-        <h2>Cold War &amp; Civil Rights Era</h2>
-        <p>1945–1975. NATO, the Iron Curtain, the Space Race, Vietnam, and the Civil Rights Movement. 5 worlds, boss battles, and a live leaderboard.</p>
+  <!-- GAME 1: Cold War & Civil Rights Era -->
+  <div class="game-section">
+    <div class="game-section-header">
+      <span class="game-section-header-label">&#9733; &nbsp;Cold War &amp; Civil Rights Era</span>
+    </div>
+    <div class="game-layout">
+      <a class="card" href="https://jakerichardson-afk.github.io/cold-war-civil-rights-game/" style="--accent:#B22234; --accent-bg:#fff0f0;">
+        <div class="card-body">
+          <div class="card-icon">&#x1F985;</div>
+          <span class="card-tag">US History</span>
+          <h2>Cold War &amp; Civil Rights Era</h2>
+          <p>1945&ndash;1975. NATO, the Iron Curtain, the Space Race, Vietnam, and the Civil Rights Movement. 5 worlds, boss battles, live leaderboard.</p>
+        </div>
+        <div class="card-footer">Play Now &nbsp;&rarr; <span>5 Worlds &middot; Leaderboard</span></div>
+      </a>
+      <div class="study-panel" style="--accent:#B22234;">
+        <div class="study-panel-tabs">
+          <button class="study-tab active" onclick="switchTab(this,'cw-videos')">&#9654; &nbsp;Crash Course Videos</button>
+          <button class="study-tab" onclick="switchTab(this,'cw-reading')">&#128218; &nbsp;USHistory.org Reading</button>
+        </div>
+        <div id="cw-videos" class="study-content active">
+          <div class="resource-cols">
+            <div class="resource-group">
+              <div class="resource-group-title">Cold War in Europe</div>
+              <ul>
+                <li><a href="https://www.youtube.com/watch?v=9C72ISMF_D0" target="_blank" rel="noopener"><i class="ico">&#9654;</i>The Cold War #37</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Cold War in the Americas</div>
+              <ul>
+                <li><a href="https://www.youtube.com/watch?v=9C72ISMF_D0" target="_blank" rel="noopener"><i class="ico">&#9654;</i>The Cold War #37</a></li>
+                <li><a href="https://www.youtube.com/watch?v=lkXFb1sMa38" target="_blank" rel="noopener"><i class="ico">&#9654;</i>The 1960s in America #40</a></li>
+                <li><a href="https://www.youtube.com/watch?v=2h4DkpFP_aw" target="_blank" rel="noopener"><i class="ico">&#9654;</i>The Reagan Revolution #43</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Cold War in Asia</div>
+              <ul>
+                <li><a href="https://www.youtube.com/watch?v=Y2IcmLkuhG0" target="_blank" rel="noopener"><i class="ico">&#9654;</i>Cold War in Asia #38</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Space Race</div>
+              <ul>
+                <li><a href="https://www.youtube.com/watch?v=9C72ISMF_D0" target="_blank" rel="noopener"><i class="ico">&#9654;</i>The Cold War #37</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Civil Rights Era</div>
+              <ul>
+                <li><a href="https://www.youtube.com/watch?v=S64zRnnn4Po" target="_blank" rel="noopener"><i class="ico">&#9654;</i>Civil Rights &amp; the 1950s #39</a></li>
+                <li><a href="https://www.youtube.com/watch?v=lkXFb1sMa38" target="_blank" rel="noopener"><i class="ico">&#9654;</i>The 1960s in America #40</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div id="cw-reading" class="study-content">
+          <div class="resource-cols">
+            <div class="resource-group">
+              <div class="resource-group-title">Cold War in Europe</div>
+              <ul>
+                <li><a href="https://www.ushistory.org/us/52a.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>The Cold War Erupts</a></li>
+                <li><a href="https://www.ushistory.org/us/52c.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>Containment &amp; the Marshall Plan</a></li>
+                <li><a href="https://www.ushistory.org/us/52d.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>Berlin Airlift and NATO</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Cold War in the Americas</div>
+              <ul>
+                <li><a href="https://www.ushistory.org/us/52a.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>The Cold War Erupts</a></li>
+                <li><a href="https://www.ushistory.org/us/56g.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>Triangular Diplomacy</a></li>
+                <li><a href="https://www.ushistory.org/us/59e.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>End of the Cold War</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Cold War in Asia</div>
+              <ul>
+                <li><a href="https://www.ushistory.org/us/52e.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>The Korean War</a></li>
+                <li><a href="https://www.ushistory.org/us/55a.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>Vietnam: Early Involvement</a></li>
+                <li><a href="https://www.ushistory.org/us/55b.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>Years of Escalation</a></li>
+                <li><a href="https://www.ushistory.org/us/55d.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>The Antiwar Movement</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Space Race</div>
+              <ul>
+                <li><a href="https://www.ushistory.org/us/53e.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>The Cold War Continues (1950s)</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Civil Rights Era</div>
+              <ul>
+                <li><a href="https://www.ushistory.org/us/54a.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>Separate No Longer?</a></li>
+                <li><a href="https://www.ushistory.org/us/54b.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>Rosa Parks &amp; the Bus Boycott</a></li>
+                <li><a href="https://www.ushistory.org/us/54f.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>Martin Luther King Jr.</a></li>
+                <li><a href="https://www.ushistory.org/us/54h.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>Malcolm X</a></li>
+                <li><a href="https://www.ushistory.org/us/54i.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>Black Power</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card-footer">Play Now &nbsp;→ <span>5 Worlds · Leaderboard</span></div>
-    </a>
-
-    <a class="card" href="https://jakerichardson-afk.github.io/American-and-the-world-study-game/" style="--accent:#002868; --accent-bg:#eef2ff;">
-      <div class="card-body">
-        <div class="card-icon">🗺️</div>
-        <span class="card-tag">US History</span>
-        <h2>America &amp; the World</h2>
-        <p>Key people, events, and turning points from the America and the World unit. Quiz yourself across multiple worlds and climb the leaderboard.</p>
-      </div>
-      <div class="card-footer">Play Now &nbsp;→ <span>Multi-World · Leaderboard</span></div>
-    </a>
-
+    </div>
   </div>
 
+  <!-- GAME 2: America & the World -->
+  <div class="game-section">
+    <div class="game-section-header">
+      <span class="game-section-header-label">&#9733; &nbsp;America &amp; the World</span>
+    </div>
+    <div class="game-layout">
+      <a class="card" href="https://jakerichardson-afk.github.io/American-and-the-world-study-game/" style="--accent:#002868; --accent-bg:#eef2ff;">
+        <div class="card-body">
+          <div class="card-icon">&#x1F5FA;&#xFE0F;</div>
+          <span class="card-tag">US History</span>
+          <h2>America &amp; the World</h2>
+          <p>Spanish-American War, WWI, the Roaring Twenties, the Great Depression, FDR, and WWII. Multiple worlds, boss battles, live leaderboard.</p>
+        </div>
+        <div class="card-footer">Play Now &nbsp;&rarr; <span>Multi-World &middot; Leaderboard</span></div>
+      </a>
+      <div class="study-panel" style="--accent:#002868;">
+        <div class="study-panel-tabs">
+          <button class="study-tab active" onclick="switchTab(this,'aw-videos')">&#9654; &nbsp;Crash Course Videos</button>
+          <button class="study-tab" onclick="switchTab(this,'aw-reading')">&#128218; &nbsp;USHistory.org Reading</button>
+        </div>
+        <div id="aw-videos" class="study-content active">
+          <div class="resource-cols">
+            <div class="resource-group">
+              <div class="resource-group-title">American Imperialism</div>
+              <ul>
+                <li><a href="https://www.youtube.com/watch?v=QfsfoFqsFk4" target="_blank" rel="noopener"><i class="ico">&#9654;</i>American Imperialism #28</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">World War I</div>
+              <ul>
+                <li><a href="https://www.youtube.com/watch?v=Spgdy3HkcSs" target="_blank" rel="noopener"><i class="ico">&#9654;</i>WWI Battles #30</a></li>
+                <li><a href="https://www.youtube.com/watch?v=Q16OZkgSXfM" target="_blank" rel="noopener"><i class="ico">&#9654;</i>America in WWI #31</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Roaring Twenties</div>
+              <ul>
+                <li><a href="https://www.youtube.com/watch?v=r6tRp-zRUJs" target="_blank" rel="noopener"><i class="ico">&#9654;</i>The Roaring 20s #32</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Great Depression &amp; New Deal</div>
+              <ul>
+                <li><a href="https://www.youtube.com/watch?v=nowsS7pMApI" target="_blank" rel="noopener"><i class="ico">&#9654;</i>The Great Depression #33</a></li>
+                <li><a href="https://www.youtube.com/watch?v=GzTrKccmj_I" target="_blank" rel="noopener"><i class="ico">&#9654;</i>The New Deal #34</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">World War II</div>
+              <ul>
+                <li><a href="https://www.youtube.com/watch?v=Objoad6rG6U" target="_blank" rel="noopener"><i class="ico">&#9654;</i>WWII Part 1 #35</a></li>
+                <li><a href="https://www.youtube.com/watch?v=HofnGQwPgqs" target="_blank" rel="noopener"><i class="ico">&#9654;</i>WWII Home Front #36</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div id="aw-reading" class="study-content">
+          <div class="resource-cols">
+            <div class="resource-group">
+              <div class="resource-group-title">American Imperialism</div>
+              <ul>
+                <li><a href="https://www.ushistory.org/us/44.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>Seeking Empire</a></li>
+                <li><a href="https://www.ushistory.org/us/44c.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>The Spanish-American War</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">World War I</div>
+              <ul>
+                <li><a href="https://www.ushistory.org/us/45.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>America in WWI</a></li>
+                <li><a href="https://www.ushistory.org/us/45a.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>The Road to War</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Roaring Twenties</div>
+              <ul>
+                <li><a href="https://www.ushistory.org/us/46.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>The Roaring Twenties</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">Great Depression &amp; New Deal</div>
+              <ul>
+                <li><a href="https://www.ushistory.org/us/48.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>The Great Depression</a></li>
+                <li><a href="https://www.ushistory.org/us/49.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>FDR &amp; the New Deal</a></li>
+              </ul>
+            </div>
+            <div class="resource-group">
+              <div class="resource-group-title">World War II</div>
+              <ul>
+                <li><a href="https://www.ushistory.org/us/50.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>The Road to Pearl Harbor</a></li>
+                <li><a href="https://www.ushistory.org/us/51.asp" target="_blank" rel="noopener"><i class="ico">&#8594;</i>America in WWII</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tips -->
   <div class="tips">
-    <h3>★ &nbsp;How to Get the Most Out of These Games</h3>
+    <h3>&#9733; &nbsp;How to Get the Most Out of These Games</h3>
     <ul>
-      <li><span>📖</span><span>Read the explanation after every question — even the ones you get right.</span></li>
-      <li><span>🔁</span><span>Replay a world after studying to see how much your score improves.</span></li>
-      <li><span>🏆</span><span>Your best score is saved to the leaderboard — try to crack the top 3.</span></li>
-      <li><span>📱</span><span>These games work on your phone if you want to study on the go.</span></li>
+      <li><span>&#128218;</span><span>Read the explanation after every question &mdash; even the ones you get right.</span></li>
+      <li><span>&#128257;</span><span>Replay a world after studying to see how much your score improves.</span></li>
+      <li><span>&#127942;</span><span>Your best score is saved to the leaderboard &mdash; try to crack the top 3.</span></li>
+      <li><span>&#128241;</span><span>These games work on your phone if you want to study on the go.</span></li>
     </ul>
-  </div>
-
-  <p class="section-label">★ &nbsp;USHistory.org Reading by Topic</p>
-
-  <div class="resource-grid" style="margin-bottom:2.5rem;">
-
-    <div class="resource-group" style="border-top-color:#B22234;">
-      <div class="resource-group-title">🌍 Cold War in Europe</div>
-      <ul>
-        <li><a href="https://www.ushistory.org/us/52a.asp" target="_blank" rel="noopener"><span class="yt">→</span>The Cold War Erupts</a></li>
-        <li><a href="https://www.ushistory.org/us/52c.asp" target="_blank" rel="noopener"><span class="yt">→</span>Containment &amp; the Marshall Plan</a></li>
-        <li><a href="https://www.ushistory.org/us/52d.asp" target="_blank" rel="noopener"><span class="yt">→</span>The Berlin Airlift and NATO</a></li>
-      </ul>
-    </div>
-
-    <div class="resource-group" style="border-top-color:#B22234;">
-      <div class="resource-group-title">🌎 Cold War in the Americas</div>
-      <ul>
-        <li><a href="https://www.ushistory.org/us/52a.asp" target="_blank" rel="noopener"><span class="yt">→</span>The Cold War Erupts</a></li>
-        <li><a href="https://www.ushistory.org/us/56g.asp" target="_blank" rel="noopener"><span class="yt">→</span>Triangular Diplomacy: U.S., USSR &amp; China</a></li>
-        <li><a href="https://www.ushistory.org/us/59e.asp" target="_blank" rel="noopener"><span class="yt">→</span>The End of the Cold War</a></li>
-      </ul>
-    </div>
-
-    <div class="resource-group" style="border-top-color:#B22234;">
-      <div class="resource-group-title">🌏 Cold War in Asia</div>
-      <ul>
-        <li><a href="https://www.ushistory.org/us/52e.asp" target="_blank" rel="noopener"><span class="yt">→</span>The Korean War</a></li>
-        <li><a href="https://www.ushistory.org/us/55a.asp" target="_blank" rel="noopener"><span class="yt">→</span>Vietnam: Early Involvement</a></li>
-        <li><a href="https://www.ushistory.org/us/55b.asp" target="_blank" rel="noopener"><span class="yt">→</span>Years of Escalation: 1965–68</a></li>
-        <li><a href="https://www.ushistory.org/us/55d.asp" target="_blank" rel="noopener"><span class="yt">→</span>The Antiwar Movement</a></li>
-      </ul>
-    </div>
-
-    <div class="resource-group" style="border-top-color:#B22234;">
-      <div class="resource-group-title">🚀 The Space Race</div>
-      <ul>
-        <li><a href="https://www.ushistory.org/us/53e.asp" target="_blank" rel="noopener"><span class="yt">→</span>The Cold War Continues (1950s)</a></li>
-        <li><a href="https://www.ushistory.org/us/52a.asp" target="_blank" rel="noopener"><span class="yt">→</span>The Cold War Erupts (context)</a></li>
-      </ul>
-    </div>
-
-    <div class="resource-group" style="border-top-color:#B22234;">
-      <div class="resource-group-title">✊ Civil Rights Era</div>
-      <ul>
-        <li><a href="https://www.ushistory.org/us/54a.asp" target="_blank" rel="noopener"><span class="yt">→</span>Separate No Longer?</a></li>
-        <li><a href="https://www.ushistory.org/us/54b.asp" target="_blank" rel="noopener"><span class="yt">→</span>Rosa Parks &amp; the Montgomery Bus Boycott</a></li>
-        <li><a href="https://www.ushistory.org/us/54f.asp" target="_blank" rel="noopener"><span class="yt">→</span>Martin Luther King Jr.</a></li>
-        <li><a href="https://www.ushistory.org/us/54h.asp" target="_blank" rel="noopener"><span class="yt">→</span>Malcolm X and the Nation of Islam</a></li>
-        <li><a href="https://www.ushistory.org/us/54i.asp" target="_blank" rel="noopener"><span class="yt">→</span>Black Power</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <p class="section-label">★ &nbsp;Crash Course Study Videos</p>
-
-  <div class="resource-grid">
-
-    <div class="resource-group">
-      <div class="resource-group-title">🌍 Cold War in Europe</div>
-      <ul>
-        <li><a href="https://www.youtube.com/watch?v=9C72ISMF_D0" target="_blank" rel="noopener"><span class="yt">▶</span>Cold War</a></li>
-        <li><a href="https://www.youtube.com/watch?v=9C72ISMF_D0" target="_blank" rel="noopener"><span class="yt">▶</span>Communism vs. Capitalism</a></li>
-        <li><a href="https://www.youtube.com/watch?v=9C72ISMF_D0" target="_blank" rel="noopener"><span class="yt">▶</span>Communism (World History)</a></li>
-        <li><a href="https://www.youtube.com/watch?v=9C72ISMF_D0" target="_blank" rel="noopener"><span class="yt">▶</span>Stalin's Gulag</a></li>
-      </ul>
-    </div>
-
-    <div class="resource-group">
-      <div class="resource-group-title">🌎 Cold War in the Americas</div>
-      <ul>
-        <li><a href="https://www.youtube.com/watch?v=lkXFb1sMa38" target="_blank" rel="noopener"><span class="yt">▶</span>JFK &amp; the Cuban Crisis</a></li>
-        <li><a href="https://www.youtube.com/watch?v=OCrxD19DHA8" target="_blank" rel="noopener"><span class="yt">▶</span>Nixon &amp; Détente</a></li>
-        <li><a href="https://www.youtube.com/watch?v=2h4DkpFP_aw" target="_blank" rel="noopener"><span class="yt">▶</span>Reagan &amp; the Cold War</a></li>
-      </ul>
-    </div>
-
-    <div class="resource-group">
-      <div class="resource-group-title">🌏 Cold War in Asia</div>
-      <ul>
-        <li><a href="https://www.youtube.com/watch?v=Y2IcmLkuhG0" target="_blank" rel="noopener"><span class="yt">▶</span>Korean War</a></li>
-        <li><a href="https://www.youtube.com/watch?v=Y2IcmLkuhG0" target="_blank" rel="noopener"><span class="yt">▶</span>Vietnam War</a></li>
-        <li><a href="https://www.youtube.com/watch?v=Y2IcmLkuhG0" target="_blank" rel="noopener"><span class="yt">▶</span>Mao's China</a></li>
-      </ul>
-    </div>
-
-    <div class="resource-group">
-      <div class="resource-group-title">🚀 The Space Race</div>
-      <ul>
-        <li><a href="https://www.youtube.com/watch?v=9C72ISMF_D0" target="_blank" rel="noopener"><span class="yt">▶</span>The Space Race &amp; the 1950s</a></li>
-        <li><a href="https://www.youtube.com/watch?v=9C72ISMF_D0" target="_blank" rel="noopener"><span class="yt">▶</span>Cold War (context)</a></li>
-      </ul>
-    </div>
-
-    <div class="resource-group">
-      <div class="resource-group-title">✊ Civil Rights Era</div>
-      <ul>
-        <li><a href="https://www.youtube.com/watch?v=S64zRnnn4Po" target="_blank" rel="noopener"><span class="yt">▶</span>Civil Rights Movement</a></li>
-      </ul>
-    </div>
-
   </div>
 
 </main>
 
 <div class="footer-stripe"></div>
 <footer>
-  <strong>Mr. Richardson's Study World</strong> &nbsp;·&nbsp; Use these games to prepare &mdash; not to replace studying.
+  <strong>Mr. Richardson's Study World</strong> &nbsp;&middot;&nbsp; Use these games to prepare &mdash; not to replace studying.
 </footer>
 
+<script>
+  function switchTab(btn, contentId) {
+    var panel = btn.closest('.study-panel');
+    panel.querySelectorAll('.study-tab').forEach(function(t){ t.classList.remove('active'); });
+    panel.querySelectorAll('.study-content').forEach(function(c){ c.classList.remove('active'); });
+    btn.classList.add('active');
+    panel.querySelector('#' + contentId).classList.add('active');
+  }
+</script>
 </body>
 </html>

@@ -209,6 +209,40 @@
     }
     .tips li span:first-child { flex-shrink: 0; margin-top: 1px; }
 
+    /* ── Resource Grid ── */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .resource-group {
+      background: white;
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.09);
+      border-top: 4px solid #002868;
+    }
+    .resource-group-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      color: #002868;
+      margin-bottom: 0.8rem;
+    }
+    .resource-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .resource-group li a {
+      font-size: 0.85rem;
+      color: #374151;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.15s;
+    }
+    .resource-group li a:hover { color: #B22234; }
+    .resource-group li a .yt { color: #ff0000; font-size: 0.75rem; flex-shrink: 0; }
+
     /* ── Footer ── */
     .footer-stripe {
       height: 8px;
@@ -278,6 +312,55 @@
       <li><span>🏆</span><span>Your best score is saved to the leaderboard — try to crack the top 3.</span></li>
       <li><span>📱</span><span>These games work on your phone if you want to study on the go.</span></li>
     </ul>
+  </div>
+
+  <p class="section-label">★ &nbsp;Crash Course Study Videos</p>
+
+  <div class="resource-grid">
+
+    <div class="resource-group">
+      <div class="resource-group-title">🌍 Cold War in Europe</div>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=A6n8GqECeHs" target="_blank" rel="noopener"><span class="yt">▶</span>Cold War</a></li>
+        <li><a href="https://www.youtube.com/watch?v=ubNHIBiDGCo" target="_blank" rel="noopener"><span class="yt">▶</span>Communism vs. Capitalism</a></li>
+        <li><a href="https://www.youtube.com/watch?v=6OF4BFYYMQU" target="_blank" rel="noopener"><span class="yt">▶</span>Communism (World History)</a></li>
+        <li><a href="https://www.youtube.com/watch?v=HBkkFkNJFRc" target="_blank" rel="noopener"><span class="yt">▶</span>Stalin's Gulag</a></li>
+      </ul>
+    </div>
+
+    <div class="resource-group">
+      <div class="resource-group-title">🌎 Cold War in the Americas</div>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=jO_RIWVCBzg" target="_blank" rel="noopener"><span class="yt">▶</span>JFK &amp; the Cuban Crisis</a></li>
+        <li><a href="https://www.youtube.com/watch?v=VHV5tJsk_2M" target="_blank" rel="noopener"><span class="yt">▶</span>Nixon &amp; Détente</a></li>
+        <li><a href="https://www.youtube.com/watch?v=x3kJRCVRVRQ" target="_blank" rel="noopener"><span class="yt">▶</span>Reagan &amp; the Cold War</a></li>
+      </ul>
+    </div>
+
+    <div class="resource-group">
+      <div class="resource-group-title">🌏 Cold War in Asia</div>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=vP3rqtjpqFI" target="_blank" rel="noopener"><span class="yt">▶</span>Korean War</a></li>
+        <li><a href="https://www.youtube.com/watch?v=W5nFBSw3KCI" target="_blank" rel="noopener"><span class="yt">▶</span>Vietnam War</a></li>
+        <li><a href="https://www.youtube.com/watch?v=pqH4pJpzstw" target="_blank" rel="noopener"><span class="yt">▶</span>Mao's China</a></li>
+      </ul>
+    </div>
+
+    <div class="resource-group">
+      <div class="resource-group-title">🚀 The Space Race</div>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=OqSo4nMn8pY" target="_blank" rel="noopener"><span class="yt">▶</span>The Space Race &amp; the 1950s</a></li>
+        <li><a href="https://www.youtube.com/watch?v=A6n8GqECeHs" target="_blank" rel="noopener"><span class="yt">▶</span>Cold War (context)</a></li>
+      </ul>
+    </div>
+
+    <div class="resource-group">
+      <div class="resource-group-title">✊ Civil Rights Era</div>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=S6SjmkwGSAM" target="_blank" rel="noopener"><span class="yt">▶</span>Civil Rights Movement</a></li>
+      </ul>
+    </div>
+
   </div>
 
 </main>
